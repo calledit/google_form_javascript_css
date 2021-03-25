@@ -26,11 +26,17 @@ $output = curl_exec($curl_Session);
 curl_close($curl_Session);
 
 //fix refernces to google so that the form stays of googles domains
-$type = 'action';
-$pts = explode(' '.$type.'="https://docs.google.com/forms/', $output);
-if(count($pts) != 2){
-	$type = 'href';
+$types = array(
+	'action',
+	'href',
+	'HREF'
+);
+foreach($types AS $tp){
+	$type = $tp;
 	$pts = explode(' '.$type.'="https://docs.google.com/forms/', $output);
+	if(count($pts) == 2){
+		break;
+	}
 }
 if(count($pts) == 2){
 	$spts = explode('"', $pts[1]);
