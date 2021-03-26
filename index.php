@@ -48,7 +48,18 @@ if(count($pts) == 2){
 //Redirect XHR rexests to local proxy as google does not allow cross site XHR
 (function (XHR) {
     var open = XHR.prototype.open;
+    var send = XHR.prototype.send;
+    XHR.prototype.send = function (body) {
+		if(!this._fail){
+			send.call(this, body);
+		}
+	};
     XHR.prototype.open = function (method, url, async, user, pass) {
+		this._fail = false;
+		if(url[0] == '/'){
+			//The requests without domain requires cookies and we dont have the cookies, the form works anyway so we just ignore those requests
+			this._fail = true;
+		}
         this._url = url;
         if (url.indexOf("gstatic.com") !== -1 ||
             url.indexOf("docs.google.com") !== -1) {
