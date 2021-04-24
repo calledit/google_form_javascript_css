@@ -8,7 +8,7 @@ a google form.
 ## Usage
 Upload **index.php, example.php and proxy.php** to a webserver that supports php.
 To add CSS and javascript to your google form edit the example.php file
-```html
+```php
 <?php
 if(!isset($_GET['url'])){
 	//the url to the google form
