@@ -10,8 +10,10 @@ Upload **index.php, example.php and proxy.php** to a webserver that supports php
 To add CSS and javascript to your google form edit the example.php file
 ```html
 <?php
-//the url to the google form
-$_GET['url'] = 'https://docs.google.com/forms/d/e/1FAIpQLScJCYDMZB9jAAmlO5OIx740nWg3WrVDrkb9nL8XF1_BE9b-Vg/viewform';
+if(!isset($_GET['url'])){
+	//the url to the google form
+	$_GET['url'] = 'https://docs.google.com/forms/d/e/1FAIpQLSdF2sUM_3WkdMgtEBd2NlSgKrVdhMMtHJ5_zjOtURrTCootCQ/viewform';
+}
 include("index.php");//include the google form 
 ?>
 <style>
