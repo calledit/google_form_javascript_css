@@ -26,17 +26,17 @@ url to google form:
 exit;
 }
 
-$context = null;
+$context = array('http' => array());
+//select the users language
+if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
+	$context['http']['header'] = array("Accept-Language: ${HTTP_ACCEPT_LANGUAGE}\r\n");
+}
 //Sumbmit the form to google
 if(count($_POST) > 0){
-	$context = [
-		'http' => [
-			'method' => 'POST',
-			'content' => http_build_query($_POST),
-		]
-	];
-	$context = stream_context_create($context);
+	$context['http']['method'] = 'POST';
+	$context['http']['content'] = http_build_query($_POST);
 }
+$context = stream_context_create($context);
 $output = file_get_contents($form_url, false, $context);
 
 //replace links to google so that the form stays of googles domains
