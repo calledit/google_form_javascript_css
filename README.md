@@ -35,7 +35,7 @@ include("index.php");//include the google form
 ?>
 <style>
   /* make the backgound white*/
-.freebirdLightBackground,freebirdSolidBackground,body{
+.freebirdLightBackground,.freebirdSolidBackground,body{
     background-color: white !important
 }
   /*Hide banners*/
