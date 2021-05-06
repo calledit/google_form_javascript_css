@@ -23,6 +23,8 @@ To add CSS and javascript to your google form edit the example.php file
 
 ### Example
 Showing some basic CSS styling, hiding questions and filling out some questions with infromation such as the userAgent
+
+Live demo hosted on google app engine https://psyched-scene-312917.ew.r.appspot.com/example.php
 ```php
 <?php
 if(!isset($_GET['url'])){
