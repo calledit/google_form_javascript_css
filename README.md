@@ -1,13 +1,28 @@
 # google_form_javascript_css
 System to embed css and javascript in to a google form
 
-php scripts that enables one to add custom stylesheats and custom javascript to
+php scripts that allows adding custom stylesheats and custom javascript to
 a google form.
+
+### This is useful for
+* hiding questions
+* capturing which browser the user is using
+* capturing how large the users screen is
+* capturing how long time the user took to fill out the form
+* try to stop users from submiting the form more than one time.
+* Setting time limts on the google form.
+* Customizing the look and style of the form.
+* Hiding or showing questions based on earlier answerd questions.
+* Adding tracking to google forms like google analytics.
+* Detecting when users fill out questions but dont submit the from.
 
 
 ## Usage
 Upload **index.php, example.php and proxy.php** to a webserver that supports php.
 To add CSS and javascript to your google form edit the example.php file
+
+### Example
+Showing some basic CSS styling, hiding questions and filling out some questions with infromation such as the userAgent
 ```php
 <?php
 if(!isset($_GET['url'])){
