@@ -27,10 +27,8 @@ exit;
 }
 
 $context = array('http' => array());
-//select the users language
-if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
-	$context['http']['header'] = array("Accept-Language: ".$_SERVER['HTTP_ACCEPT_LANGUAGE']."\r\n");
-}
+//We force english otherwise the form forces us to use the server locations country
+$context['http']['header'] = array("Accept-Language: en-US,en;q=0.8,aa;q=0.6\r\n");
 //Sumbmit the form to google
 if(count($_POST) > 0){
 	$context['http']['method'] = 'POST';
