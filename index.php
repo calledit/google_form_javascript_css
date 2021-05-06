@@ -1,9 +1,21 @@
 <?php
-//What form should we mediate
+$ok_domains = array(
+	'gstatic.com',
+	'ssl.gstatic.com',
+	'docs.google.com',
+	'www.gstatic.com',
+	'www.ssl.gstatic.com',
+	'www.docs.google.com'
+);
 $form_url = NULL;
 if(isset($_GET['url'])){
 	$form_url = $_GET['url'];
+	$parsed_url = parse_url($form_url);
+	if(!in_array($parsed_url['host'], $ok_domains)){
+		exit;//exit if non approved url
+	}
 }else{
+//Show form selection if we dont have a form
 ?>
 <form>
 url to google form:
@@ -14,18 +26,20 @@ url to google form:
 exit;
 }
 
+$context = null;
 //Sumbmit the form to google
-$curl_Session = curl_init();
-curl_setopt($curl_Session, CURLOPT_URL, $form_url);
-curl_setopt($curl_Session, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($curl_Session, CURLOPT_SSL_VERIFYHOST, 0);
 if(count($_POST) > 0){
-	curl_setopt($curl_Session, CURLOPT_POSTFIELDS, $_POST);
+	$context = [
+		'http' => [
+			'method' => 'POST',
+			'content' => http_build_query($_POST),
+		]
+	];
+	$context = stream_context_create($context);
 }
-$output = curl_exec($curl_Session);
-curl_close($curl_Session);
+$output = file_get_contents($form_url, false, $context);
 
-//fix refernces to google so that the form stays of googles domains
+//replace links to google so that the form stays of googles domains
 $types = array(
 	'action',
 	'href',
@@ -43,6 +57,7 @@ if(count($pts) == 2){
 	$url = 'https://docs.google.com/forms/'.array_shift($spts);
 	$output = $pts[0].' '.$type.'="?url='.rawurlencode($url).'"'.implode('"', $spts);
 }
+if(!isset($_GET['proxy'])){
 ?>
 <script>
 //Redirect XHR rexests to local proxy as google does not allow cross site XHR
@@ -63,14 +78,14 @@ if(count($pts) == 2){
         this._url = url;
         if (url.indexOf("gstatic.com") !== -1 ||
             url.indexOf("docs.google.com") !== -1) {
-            url = "proxy.php?csurl=" + encodeURIComponent(url);
+            url = "index.php?proxy=1&url=" + encodeURIComponent(url);
         }
         open.call(this, method, url, async, user, pass);
     };
 })(XMLHttpRequest);
 </script>
 <?php
-
+}
 echo $output;
 
 ?>

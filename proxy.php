@@ -90,10 +90,8 @@ if ('GET' == $request_method) {
             $request_params = $data;
         }
     }
-} elseif ('PUT' == $request_method || 'DELETE' == $request_method) {
-    $request_params = file_get_contents('php://input');
 } else {
-    $request_params = null;
+    exit;//only GET AND POST allowed
 }
 
 // Get URL from `csurl` in GET or POST data, before falling back to X-Proxy-URL header.
@@ -147,41 +145,48 @@ if ($request_method == 'GET' && count($request_params) > 0 && (!array_key_exists
     $request_url .= '?' . http_build_query($request_params);
 }
 
-// let the request begin
-$ch = curl_init($request_url);
-
 // Suppress Expect header
 if (CSAJAX_SUPPRESS_EXPECT) {
     array_push($request_headers, 'Expect:'); 
 }
 
-curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);   // (re-)send headers
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);     // return response
-curl_setopt($ch, CURLOPT_HEADER, true);       // enabled response headers
-// add data for POST, PUT or DELETE requests
-if ('POST' == $request_method) {
-    $post_data = is_array($request_params) ? http_build_query($request_params) : $request_params;
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS,  $post_data);
-} elseif ('PUT' == $request_method || 'DELETE' == $request_method) {
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $request_method);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $request_params);
+
+$context = null;
+//Sumbmit the form to google
+if(count($_POST) > 0){
+	$context = [
+		'http' => [
+			'method' => 'POST',
+			'content' => http_build_query($_POST),
+		]
+	];
+	$context = stream_context_create($context);
+}
+/*
+$context = [
+    'http' => [
+        //'method' => $request_method,
+        'header' => $request_headers,
+    ]
+];
+if($request_method == 'POST'){
+	$context['http']['content'] = http_build_query($_POST);
 }
 
-// Set multiple options for curl according to configuration
-if (is_array($curl_options) && 0 <= count($curl_options)) {
-    curl_setopt_array($ch, $curl_options);
-}
+//var_dump($context);
+$context = stream_context_create($context);
 
+$context = null;
+*/
 // retrieve response (headers and content)
-$response = curl_exec($ch);
-curl_close($ch);
+$response = file_get_contents($request_url, false, $context);
 
 // split response to header and content
-list($response_headers, $response_content) = preg_split('/(\r\n){2}/', $response, 2);
+//list($response_headers, $response_content) = preg_split('/(\r\n){2}/', $response, 2);
+$response_headers = $http_response_header;
+$response_content = $response;
 
 // (re-)send the headers
-$response_headers = preg_split('/(\r\n){1}/', $response_headers);
 foreach ($response_headers as $key => $response_header) {
     // Rewrite the `Location` header, so clients will also use the proxy for redirects.
     if (preg_match('/^Location:/', $response_header)) {
@@ -189,7 +194,7 @@ foreach ($response_headers as $key => $response_header) {
         $response_header = 'Location: ' . $_SERVER['REQUEST_URI'] . '?csurl=' . $value;
     }
     if (!preg_match('/^(Transfer-Encoding):/', $response_header)) {
-        header($response_header, false);
+        //header($response_header, false);
     }
 }
 
