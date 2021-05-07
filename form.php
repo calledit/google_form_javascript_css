@@ -28,10 +28,11 @@ exit;
 
 $context = array('http' => array());
 //We force english otherwise the form forces us to use the server locations country
-$context['http']['header'] = array("Accept-Language: en-US,en;q=0.8,aa;q=0.6\r\n");
+$context['http']['header'] = "Accept-Language: en-US,en;q=0.8,aa;q=0.6\r\n";
 //Sumbmit the form to google
 if(count($_POST) > 0){
 	$context['http']['method'] = 'POST';
+	$context['http']['header'] .= "Content-Type: application/x-www-form-urlencoded\r\n";
 	$context['http']['content'] = http_build_query($_POST);
 }
 $context = stream_context_create($context);
