@@ -9,7 +9,12 @@ include("form.php");//include the google form
 <style>
   /* make the backgound white*/
 .freebirdLightBackground,.freebirdSolidBackground,body{
-    background-color: white !important
+    background-color: white !important;
+	color: black !important;
+}
+body{
+	background-image: url('https://lh6.googleusercontent.com/Hg_pKUt7zv8FUokb5DMz0h88wR52H_6yREYm8Ei-zftGJBfnS4ym3mmBCxdFskA0dpA8t6IHSt5f3F_5n4uo4Uv8bp7AsatykB_8z2rPaFqOK-mJ0BlDSYHonBf5I88tfg=w740');
+	background-size: cover;
 }
   /*Hide banners*/
 .freebirdFormviewerViewFooterDisclaimer,
@@ -25,9 +30,12 @@ include("form.php");//include the google form
 
 	//Create an index of the questions on this page
 	var Question_Index = {};
-	var Questions = document.querySelectorAll('.exportItemTitle');
+	var Questions = document.querySelectorAll('.freebirdFormviewerViewNumberedItemContainer');
 	for(i=0;i<Questions.length;i++){
-		Question_Index[Questions[i].childNodes[0].nodeValue] = Questions[i].parentElement.parentElement.parentElement.parentElement.parentElement;
+		var title_holder = Questions[i].querySelector('.exportItemTitle');
+		if(title_holder && title_holder.childNodes[0]){
+			Question_Index[title_holder.childNodes[0].nodeValue] = Questions[i];
+		}
 	}
 
 

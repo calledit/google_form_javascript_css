@@ -14,7 +14,7 @@ a google form.
 * Customizing the look and style of the form.
 * Hiding or showing questions based on earlier answerd questions.
 * Adding tracking to google forms like google analytics.
-* Detecting when users fill out questions but dont submit the from.
+* Detecting when users fill out questions but dont submit the form.
 
 
 ## Usage
