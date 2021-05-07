@@ -27,16 +27,22 @@ Showing some basic CSS styling, hiding questions and filling out some questions 
 Live demo hosted on google app engine https://psyched-scene-312917.ew.r.appspot.com/example.php
 ```php
 <?php
+
 if(!isset($_GET['url'])){
 	//the url to the google form
-	$_GET['url'] = 'https://docs.google.com/forms/d/e/1FAIpQLSdF2sUM_3WkdMgtEBd2NlSgKrVdhMMtHJ5_zjOtURrTCootCQ/viewform';
+	$_GET['url'] = 'https://docs.google.com/forms/d/e/1FAIpQLSdz63Nn6HJw7h2SSJT88-3R63VBq0g7-K4f1xqUSzTykWkRgg/viewform';
 }
-include("index.php");//include the google form 
+include("form.php");//include the google form 
 ?>
 <style>
   /* make the backgound white*/
 .freebirdLightBackground,.freebirdSolidBackground,body{
-    background-color: white !important
+    background-color: white !important;
+	color: black !important;
+}
+body{
+	background-image: url('https://lh6.googleusercontent.com/Hg_pKUt7zv8FUokb5DMz0h88wR52H_6yREYm8Ei-zftGJBfnS4ym3mmBCxdFskA0dpA8t6IHSt5f3F_5n4uo4Uv8bp7AsatykB_8z2rPaFqOK-mJ0BlDSYHonBf5I88tfg=w740');
+	background-size: cover;
 }
   /*Hide banners*/
 .freebirdFormviewerViewFooterDisclaimer,
@@ -52,9 +58,12 @@ include("index.php");//include the google form
 
 	//Create an index of the questions on this page
 	var Question_Index = {};
-	var Questions = document.querySelectorAll('.exportItemTitle');
+	var Questions = document.querySelectorAll('.freebirdFormviewerViewNumberedItemContainer');
 	for(i=0;i<Questions.length;i++){
-		Question_Index[Questions[i].childNodes[0].nodeValue] = Questions[i].parentElement.parentElement.parentElement.parentElement.parentElement;
+		var title_holder = Questions[i].querySelector('.exportItemTitle');
+		if(title_holder && title_holder.childNodes[0]){
+			Question_Index[title_holder.childNodes[0].nodeValue] = Questions[i];
+		}
 	}
 
 
