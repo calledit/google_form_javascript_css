@@ -76,7 +76,7 @@ if(!isset($_GET['proxy'])){
         this._url = url;
         if (url.indexOf("gstatic.com") !== -1 ||
             url.indexOf("docs.google.com") !== -1) {
-            url = "index.php?proxy=1&url=" + encodeURIComponent(url);
+            url = "?proxy=1&url=" + encodeURIComponent(url);
         }
         open.call(this, method, url, async, user, pass);
     };
@@ -86,4 +86,7 @@ if(!isset($_GET['proxy'])){
 }
 echo $output;
 
+if(isset($_GET['proxy'])){
+	exit;
+}
 ?>

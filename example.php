@@ -4,7 +4,7 @@ if(!isset($_GET['url'])){
 	//the url to the google form
 	$_GET['url'] = 'https://docs.google.com/forms/d/e/1FAIpQLSdz63Nn6HJw7h2SSJT88-3R63VBq0g7-K4f1xqUSzTykWkRgg/viewform';
 }
-include("index.php");//include the google form 
+include("form.php");//include the google form 
 ?>
 <style>
   /* make the backgound white*/
