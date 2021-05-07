@@ -18,7 +18,7 @@ a google form.
 
 
 ## Usage
-Upload **index.php, example.php and proxy.php** to a webserver that supports php.
+Upload **form.php and example.php** to a webserver that supports php.
 To add CSS and javascript to your google form edit the example.php file
 
 ### Example
