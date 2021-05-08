@@ -15,14 +15,6 @@ if(isset($_GET['url'])){
 		exit;//exit if non approved url
 	}
 }else{
-//Show form selection if we dont have a form
-?>
-<form>
-url to google form:
-<input type="text" name="url">
-<input type="submit">
-</form>
-<?php
 exit;
 }
 
@@ -91,3 +83,41 @@ if(isset($_GET['proxy'])){
 	exit;
 }
 ?>
+<script>
+
+//Create an index of the questions on this page
+var Question_Index = {};
+var Headers_Index = {};
+var Questions = document.querySelectorAll('.freebirdFormviewerViewNumberedItemContainer');
+for(i=0;i<Questions.length;i++){
+	var title_holder = Questions[i].querySelector('.exportItemTitle');
+	if(title_holder){
+		if(title_holder.childNodes[0]){
+			Question_Index[title_holder.childNodes[0].nodeValue] = Questions[i];
+		}
+	}else{
+		var header_text = Questions[i].querySelector('[role="heading"]').innerText
+		Headers_Index[header_text] = Questions[i];
+	}
+}
+
+//function to set or get the value of a question
+function question_val(question, value, overwrite){
+	if(typeof(Question_Index[question]) == 'undefined'){
+		return false;
+	}
+	var input = Question_Index[question].querySelector('input');
+	var current_val = input.value;
+	if(typeof(value) == 'undefined'){
+		return current_val;
+	}
+	if(overwrite || current_val == ""){
+		if(typeof(value) == 'function'){
+			value = value(current_val);
+		}
+		input.value = value;
+		input.dispatchEvent(new Event('input', {bubbles: true, cancelable: true}));
+	}
+}
+
+</script>
