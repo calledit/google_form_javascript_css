@@ -17,22 +17,23 @@ a google form.
 * Detecting when users fill out questions but dont submit the form.
 
 
-## Usage
+## Using the severless inline css/javascript live demo
+On the live demo severless page: https://psyched-scene-312917.ew.r.appspot.com/serverless.php use the example form:
+```
+https://docs.google.com/forms/d/e/1FAIpQLSfyFYo38iB9qKOZxnTCJGlH-A6yBg_l1excYRv6gMz5mAosiQ/viewform
+```
+
+
+to create your own serverless css/javascript form, create a text section in your form with
+the heading &lt;html&gt; and fill it with your css/javascript see picture. After that you can use your own styled form with the serverless live demo. 
+
+<img src="https://raw.githubusercontent.com/calledit/google_form_javascript_css/master/google_form_serverless_2021.png" alt="screenshot of form with inline js" width="50%"/>
+
+## Using your own server
 Upload **form.php and example.php** to a webserver that supports php.
 To add CSS and javascript to your google form edit the example.php file
 
-### Severless example
-This example hosts the javascript and css styling in the form itself.
-
-Paste in the example form:
-https://docs.google.com/forms/d/e/1FAIpQLSfyFYo38iB9qKOZxnTCJGlH-A6yBg_l1excYRv6gMz5mAosiQ/viewform
-on the folowing page:
-https://psyched-scene-312917.ew.r.appspot.com/serverless.php
-
-#### to create your own serverless form create a text part in your form with
-the heading <html> see picture. 
-
-### Example
+## Example
 Showing some basic CSS styling, hiding questions and filling out some questions with infromation such as the userAgent
 
 Live demo hosted on google app engine https://psyched-scene-312917.ew.r.appspot.com/example.php
