@@ -25,7 +25,8 @@ https://docs.google.com/forms/d/e/1FAIpQLSfyFYo38iB9qKOZxnTCJGlH-A6yBg_l1excYRv6
 
 
 to create your own serverless css/javascript form, create a text section in your form with
-the heading &lt;html&gt; and fill it with your css/javascript see picture. After that you can use your own styled form with the serverless live demo. 
+the heading &lt;html&gt; and fill it with your css/javascript (see picture). After that you can use your own styled form with the serverless live demo. 
+Each page of the form needs its own &lt;html&gt; section, you can use that to style each page of the form differently.
 
 <img src="https://raw.githubusercontent.com/calledit/google_form_javascript_css/master/google_form_serverless_2021.png" alt="screenshot of form with inline js" width="50%"/>
 
