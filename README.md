@@ -1,7 +1,7 @@
 # google_form_javascript_css
 System to embed css and javascript in to a google form
 
-php scripts that allows adding custom stylesheats and custom javascript to
+Allows adding custom stylesheats and custom javascript to
 a google form.
 
 ### This is useful for
