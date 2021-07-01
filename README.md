@@ -17,7 +17,7 @@ a google form.
 * Detecting when users fill out questions but dont submit the form.
 
 
-## Using the severless inline css/javascript live demo
+## Using the severless inline css/javascript live demo (demo removed due to missuse)
 On the live demo severless page: https://psyched-scene-312917.ew.r.appspot.com/serverless.php use the example form:
 ```
 https://docs.google.com/forms/d/e/1FAIpQLSfyFYo38iB9qKOZxnTCJGlH-A6yBg_l1excYRv6gMz5mAosiQ/viewform
@@ -37,7 +37,7 @@ To add CSS and javascript to your google form edit the example.php file
 ## Example
 Showing some basic CSS styling, hiding questions and filling out some questions with infromation such as the userAgent
 
-Live demo hosted on google app engine https://psyched-scene-312917.ew.r.appspot.com/example.php
+Live demo hosted on google app engine https://psyched-scene-312917.ew.r.appspot.com/example.php (demo removed due to missuse)
 ```php
 <?php
 
