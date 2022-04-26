@@ -16,20 +16,6 @@ a google form.
 * Adding tracking to google forms like google analytics.
 * Detecting when users fill out questions but dont submit the form.
 
-
-## Using the severless inline css/javascript live demo (demo removed due to missuse)
-On the live demo severless page: https://psyched-scene-312917.ew.r.appspot.com/serverless.php use the example form:
-```
-https://docs.google.com/forms/d/e/1FAIpQLSfyFYo38iB9qKOZxnTCJGlH-A6yBg_l1excYRv6gMz5mAosiQ/viewform
-```
-
-
-to create your own serverless css/javascript form, create a text section in your form with
-the heading &lt;html&gt; and fill it with your css/javascript (see picture). After that you can use your own styled form with the serverless live demo. 
-Each page of the form needs its own &lt;html&gt; section, you can use that to style each page of the form differently.
-
-<img src="https://raw.githubusercontent.com/calledit/google_form_javascript_css/master/google_form_serverless_2021.png" alt="screenshot of form with inline js" width="50%"/>
-
 ## Using your own server
 Upload **form.php and example.php** to a webserver that supports php.
 To add CSS and javascript to your google form edit the example.php file
@@ -37,7 +23,6 @@ To add CSS and javascript to your google form edit the example.php file
 ## Example
 Showing some basic CSS styling, hiding questions and filling out some questions with infromation such as the userAgent
 
-Live demo hosted on google app engine https://psyched-scene-312917.ew.r.appspot.com/example.php (demo removed due to missuse)
 ```php
 <?php
 
