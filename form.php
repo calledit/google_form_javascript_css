@@ -21,6 +21,7 @@ exit;
 $context = array('http' => array());
 //We force english otherwise the form forces us to use the server locations country
 $context['http']['header'] = "Accept-Language: en-US,en;q=0.8,aa;q=0.6\r\n";
+$context['http']['header'] .= "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15\r\n";
 //Sumbmit the form to google
 if(count($_POST) > 0){
 	$context['http']['method'] = 'POST';
@@ -88,16 +89,34 @@ if(isset($_GET['proxy'])){
 //Create an index of the questions on this page
 var Question_Index = {};
 var Headers_Index = {};
-var Questions = document.querySelectorAll('.freebirdFormviewerViewNumberedItemContainer');
+
+//Each item of a google form is in a div
+var Questions = document.querySelectorAll('[role="listitem"]');
 for(i=0;i<Questions.length;i++){
-	var title_holder = Questions[i].querySelector('.exportItemTitle');
-	if(title_holder){
-		if(title_holder.childNodes[0]){
-			Question_Index[title_holder.childNodes[0].nodeValue] = Questions[i];
+	
+	//If the item has a question it has data-params
+	var question_holder = Questions[i].querySelector('[data-params]');
+	if(question_holder){
+		var title_holder = question_holder.querySelector('[role="heading"]');
+		if(title_holder){
+			if(title_holder.childNodes[0]){
+				Question_Index[title_holder.childNodes[0].innerText] = Questions[i];
+			}else{
+				console.error("Could not find question text span");
+			}
+		}else{
+			console.error("Could not find question text");
 		}
 	}else{
-		var header_text = Questions[i].querySelector('[role="heading"]').innerText
-		Headers_Index[header_text] = Questions[i];
+		//sometimes header items gets a heading role sometimes they just contain a span
+		var title_holder = Questions[i].querySelector('[role="heading"]');
+		if(!title_holder){
+			title_holder = Questions[i].querySelector('span');
+		}
+		if(title_holder){
+			var header_text = title_holder.innerText
+			Headers_Index[header_text] = Questions[i];
+		}
 	}
 }
 

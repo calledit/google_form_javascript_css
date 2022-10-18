@@ -34,6 +34,12 @@ body{
 			Question_Index[question].style.display = 'none';
 		}
 	}
+	//Hide headers that end in _hidden
+	for(question in Headers_Index){
+		if(question.substr(question.length-7) == '_hidden'){
+			Headers_Index[question].style.display = 'none';
+		}
+	}
 
 	//Set dynamic default value of questions
 	question_val('form_open_time_hidden', PageLoadTime.toISOString(), false);
