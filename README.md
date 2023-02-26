@@ -24,13 +24,15 @@ Upload **form.php and example.php** to a webserver that supports php.
 
 Then you can add CSS and javascript to the example.php file.
 
-```javacript
-The library adds one javascript convience function called question_val(question, value, overwrite);
-	question:	(string) The exact name of the question
-	value:		(string or function) What you want the default value to be, can be a value or a function (that will be called when the question is loaded)
-	overwrite:	(bool) if we are to write over the question if the form loads with a saved answer
+```javascript
+//The library adds one javascript convience function called
+question_val(
+	question	/*(string) The exact name of the question*/,
+	value		/*(string or function) What you want the default value to be, can be a value or a function (that will be called when the question is loaded)*/
+	overwrite	/*(bool) if we are to write over the question if the form loads with a saved answer*/
+	);
 	
-The library also adds two global javascript variables Question_Index and Headers_Index which contain the dom elements of all questions and headers.
+//The library also adds two global javascript variables Question_Index and Headers_Index which contain the dom elements of all questions and headers.
 ```
 
 ## Example
